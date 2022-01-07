@@ -30,9 +30,13 @@ const WatchId = navigator.geolocation.watchPosition(position => {
     $("#Accelb").text("Orientation beta : " + Math.round(event.beta));
     $("#Accelg").text("Orientation gamma : " + Math.round(event.gamma));
   }
-  function deviceMotionListener(event) {
-    $("#Accelx").text("Acceleration x : " + Math.round(event.x));
-    $("#Accely").text("Acceleration y : " + Math.round(event.y));
-    $("#Accelz").text("Acceleration z : " + Math.round(event.z));
-  }
+  function handleMotionEvent(event) {
+
+    $("#Accelx").text("Acceleration x : " + Math.round(event.accelerationIncludingGravity.x));
+    $("#Accely").text("Acceleration y : " + Math.round(event.accelerationIncludingGravity.y));
+    $("#Accelz").text("Acceleration z : " + Math.round(event.accelerationIncludingGravity.z));
   
+    // Do something awesome.
+}
+
+window.addEventListener("devicemotion", handleMotionEvent, true);
