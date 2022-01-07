@@ -46,6 +46,12 @@ window.onload = function() {
 }
 
 function handleStart(evt) {
-  console.log(TouchEvent.position)
-  console.log("toucher")
+  $("body").click(function() {
+    var $clicker = $(this);
+    var pos = $clicker.position();
+   console.log(pos.top);
+   $("#Tx").text("Toucher x : " + pos.left);
+   $("#Ty").text("Toucher y : " + pos.left);
+    console.log(pos.left);
+});
 }
