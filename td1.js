@@ -10,12 +10,12 @@ navigator.geolocation.getCurrentPosition(position => {
 
   const watchId = navigator.geolocation.watchPosition(position => {
     var { latitude, longitude } = position.coords;
-    var time = Date.now();
-    var date = new Date(time)
-    var vitesse = position.coords.speed;
+    var time = position.timestamp;
+    var date = new Date(time);
+    var accuracy = position.coords.accuracy;
 
     $("#Timestamp").text("Timestamp : " + date);
-    $("#Vitesse").text("Vitesse : " + vitesse);
+    $("#Precision").text("Precision : " + accuracy + " m");
     $("#Latitude2").text("Latitude : " + latitude);
     $("#Longitude2").text("Longitude : " + longitude);
 
