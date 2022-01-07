@@ -8,3 +8,11 @@ navigator.geolocation.getCurrentPosition(position => {
     $("#Longitude").text("Longitude : " + longitude);
 
   });
+
+  const watchId = navigator.geolocation.watchPosition(position => {
+    const { latitude, longitude } = position.coords;
+    
+    $("#Latitude2").text("Latitude : " + latitude);
+    $("#Longitude2").text("Longitude : " + longitude);
+
+  });
