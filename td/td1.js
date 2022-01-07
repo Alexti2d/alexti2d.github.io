@@ -35,8 +35,17 @@ const WatchId = navigator.geolocation.watchPosition(position => {
     $("#Accelx").text("Acceleration x : " + Math.round(event.accelerationIncludingGravity.x));
     $("#Accely").text("Acceleration y : " + Math.round(event.accelerationIncludingGravity.y));
     $("#Accelz").text("Acceleration z : " + Math.round(event.accelerationIncludingGravity.z));
-  
-    // Do something awesome.
+
 }
 
 window.addEventListener("devicemotion", handleMotionEvent, true);
+
+window.onload = function() {
+  var el = document.getElementsByTagName("body")[0];
+  el.addEventListener('touchstart', handleStart, false);
+}
+
+function handleStart(evt) {
+  console.log(TouchEvent.position)
+  console.log("toucher")
+}
