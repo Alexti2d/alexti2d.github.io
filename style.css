@@ -16,7 +16,7 @@ body {
     margin-top: -150px;
     position: fixed;
     width: 100%;
-    background-color: rgb(27, 25, 25);
+    background-color: #212529;
   }
   #Nav header {
     position: relative;

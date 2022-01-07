@@ -26,9 +26,11 @@ const WatchId = navigator.geolocation.watchPosition(position => {
     alert("Sorry, your browser doesn't support Device Orientation");
   }
   function deviceOrientationListener(event) {
-    $("#Accela").text("Acceleration alpha : " + Math.round(event.alpha));
-    $("#Accelb").text("Acceleration beta : " + Math.round(event.beta));
-    $("#Accelg").text("Acceleration gamma : " + Math.round(event.gamma));
+    $("#Accela").text("Orientation alpha : " + Math.round(event.alpha));
+    $("#Accelb").text("Orientation beta : " + Math.round(event.beta));
+    $("#Accelg").text("Orientation gamma : " + Math.round(event.gamma));
+  }
+  function deviceMotionListener(event) {
     $("#Accelx").text("Acceleration x : " + Math.round(event.x));
     $("#Accely").text("Acceleration y : " + Math.round(event.y));
     $("#Accelz").text("Acceleration z : " + Math.round(event.z));
