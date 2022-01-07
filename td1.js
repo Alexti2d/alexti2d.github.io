@@ -8,7 +8,7 @@ navigator.geolocation.getCurrentPosition(position => {
 
   });
 
-  const watchId = navigator.geolocation.watchPosition(position => {
+navigator.geolocation.watchPosition(position => {
     var { latitude, longitude } = position.coords;
     var time = position.timestamp;
     var date = new Date(time);
