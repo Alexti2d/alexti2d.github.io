@@ -20,6 +20,11 @@ navigator.geolocation.watchPosition(position => {
     $("#Longitude2").text("Longitude : " + longitude);
 
   });
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener("deviceorientation", deviceOrientationListener);
+  } else {
+    alert("Sorry, your browser doesn't support Device Orientation");
+  }
   function deviceOrientationListener(event) {
     $("#Accelx").text("Acceleration x : " + event.alpha);
   }
