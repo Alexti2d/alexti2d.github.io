@@ -1,5 +1,6 @@
 body {
     min-height: 100vh;
+    max-width: 100vw;
   }
   a {
     color: white!important;
@@ -7,4 +8,7 @@ body {
   }
   a:hover {
     color: gray!important;
+  }
+  #Nav {
+    margin-bottom: 150px;
   }
