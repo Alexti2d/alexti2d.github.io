@@ -1,0 +1,10 @@
+body {
+    min-height: 100vh;
+  }
+  a {
+    color: white!important;
+    text-decoration: none!important;
+  }
+  a:hover {
+    color: gray!important;
+  }
