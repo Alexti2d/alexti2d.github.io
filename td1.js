@@ -12,7 +12,7 @@ navigator.geolocation.getCurrentPosition(position => {
     var { latitude, longitude } = position.coords;
     var time = Date.now();
     var date = new Date(time)
-    var vitesse = position.speed;
+    var vitesse = position.coords.speed;
 
     $("#Timestamp").text("Timestamp : " + date);
     $("#Vitesse").text("Vitesse : " + vitesse);
