@@ -8,11 +8,11 @@ navigator.geolocation.getCurrentPosition(position => {
 
   });
 
-navigator.geolocation.watchPosition(position => {
-    var { latitude, longitude } = position.coords;
-    var time = position.timestamp;
-    var date = new Date(time);
-    var accuracy = position.coords.accuracy;
+const WatchId = navigator.geolocation.watchPosition(position => {
+    const { latitude, longitude } = position.coords;
+    const time = position.timestamp;
+    const date = new Date(time);
+    const accuracy = position.coords.accuracy;
 
     $("#Timestamp").text("Timestamp : " + date);
     $("#Precision").text("Precision : " + accuracy + " m");
