@@ -20,9 +20,7 @@ navigator.geolocation.watchPosition(position => {
     $("#Longitude2").text("Longitude : " + longitude);
 
   });
-  if (window.DeviceMotionEvent) {
-    window.addEventListener('devicemotion', deviceMotionHandler);
-    setTimeout(stopJump, 3*1000);
-    $("#Accelx").text("Acceleration x : " + evt.acceleration.x);
+  function deviceOrientationListener(event) {
+    $("#Accelx").text("Acceleration x : " + event.alpha);
   }
   
