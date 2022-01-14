@@ -26,3 +26,5 @@ body {
     background-color: rgb(66, 57, 57);
     color: white;
   }
+
+  #map { height: 180px; }
