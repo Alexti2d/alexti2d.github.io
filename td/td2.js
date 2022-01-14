@@ -1,4 +1,15 @@
 
+var greenIcon = L.icon({
+    iconUrl: 'leaf-green.png',
+    shadowUrl: 'leaf-shadow.png',
+
+    iconSize:     [38, 95], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
 
 navigator.geolocation.getCurrentPosition(position => {
 
@@ -11,7 +22,7 @@ navigator.geolocation.getCurrentPosition(position => {
 
     var map = L.map('map').setView([latitude, longitude], 8);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
@@ -22,7 +33,7 @@ var circle = L.circle([latitude, longitude], {
     radius: accuracy
 }).addTo(map);
 
-var marker = L.marker([latitude, longitude]).addTo(map);
+var marker = L.marker([latitude, longitude], {icon: greenIcon}).addTo(map);
 
 var from = turf.point([latitude, longitude]);
 var to = turf.point([43.283783, 5.370421]);
@@ -47,10 +58,23 @@ L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', 
 
 var polygon = L.polygon([
     [25.77, -80.3],
-    [18.47202, -80.12104],
-    [32.25184, -64.87012]
+    [18.35, -66.28],
+    [32.33, -64.73]
 ]).addTo(map2);
+
+$.ajax({
+    url:'https://api-adresse.data.gouv.fr/search/?q=draguignan&type=street',
+    type:'GET',
+    dataType: 'json',
+    error: function()
+    {
+    },
+    success: function(data) {
+      console.log(JSON.stringify(data))
+      L.geoJSON(data, {icon: greenIcon}).addTo(map);
+    } 
+});
 
   });
 
-
+    
