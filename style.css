@@ -27,4 +27,12 @@ body {
     color: white;
   }
 
-  #map { height: 180px; }
+#map, #map2 { 
+  margin-bottom: 100px;
+  aspect-ratio: 2/1;
+  border-radius: 5px;
+}
+
+#map a, #map2 a {
+  color: gray!important;
+}
