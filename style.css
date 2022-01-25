@@ -14,6 +14,7 @@ body {
   }
   #Nav {
     margin-top: -150px;
+    height: 72px!important;
     position: fixed;
     width: 100%;
     -webkit-backdrop-filter: saturate(180%) blur(10px);
@@ -35,4 +36,16 @@ body {
 
 #map a, #map2 a {
   color: gray!important;
+}
+
+#paysage {
+  display: none;
+}
+
+#rect2490:hover {
+  fill: blue!important;
+}
+
+#path2816:active {
+  fill: darkgoldenrod!important;
 }
