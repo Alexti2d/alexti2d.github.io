@@ -31,7 +31,7 @@
 
 			import * as THREE from 'three';
 
-			import Stats from './three/three.js-master/examples/jsm/libs/stats.module.js';
+			
 			import { GUI } from './gui.js';
 
 			import { GLTFLoader } from './three/three.js-master/examples/jsm/loaders/GLTFLoader.js';
@@ -93,9 +93,6 @@
 
 				window.addEventListener( 'resize', onWindowResize );
 
-				// stats
-				stats = new Stats();
-				container.appendChild( stats.dom );
 
 			}
 
@@ -234,7 +231,6 @@
 
 				renderer.render( scene, camera );
 
-				stats.update();
 
 			}
 
