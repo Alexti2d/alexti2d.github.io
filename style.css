@@ -49,3 +49,11 @@ body {
 #path2816:active {
   fill: darkgoldenrod!important;
 }
+
+.lil-gui {
+  top: 150px!important;
+}
+
+/* canvas {
+  height: 80vh!important;
+} */

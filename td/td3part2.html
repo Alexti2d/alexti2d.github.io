@@ -49,13 +49,12 @@
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
-				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 100 );
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / (window.innerHeight - 300), 0.25, 100 );
 				camera.position.set( - 5, 3, 10 );
 				camera.lookAt( new THREE.Vector3( 0, 2, 0 ) );
 
 				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xe0e0e0 );
-				scene.fog = new THREE.Fog( 0xe0e0e0, 20, 100 );
+				scene.background = new THREE.Color( 0x212529 );
 
 				clock = new THREE.Clock();
 
@@ -69,16 +68,6 @@
 				dirLight.position.set( 0, 20, 10 );
 				scene.add( dirLight );
 
-				// ground
-
-				const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
-				mesh.rotation.x = - Math.PI / 2;
-				scene.add( mesh );
-
-				const grid = new THREE.GridHelper( 200, 40, 0x000000, 0x000000 );
-				grid.material.opacity = 0.2;
-				grid.material.transparent = true;
-				scene.add( grid );
 
 				// model
 
@@ -98,7 +87,7 @@
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.setSize( window.innerWidth, window.innerHeight - 300 );
 				renderer.outputEncoding = THREE.sRGBEncoding;
 				container.appendChild( renderer.domElement );
 
