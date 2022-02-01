@@ -34,7 +34,7 @@
 			import { GLTFLoader } from './three/three.js-master/examples/jsm/loaders/GLTFLoader.js';
 
       import { OrbitControls } from './three/three.js-master/examples/jsm/controls/OrbitControls.js'
-
+      var image = new THREE.TextureLoader().load( 'baguette.jpg' );
       //scene
       var scene = new THREE.Scene();
       scene.background = new THREE.Color( 0x212529 );
@@ -80,7 +80,7 @@
 
 
 
-
+      
       
 
       function latlon(lat1, long1) {
@@ -90,10 +90,10 @@
         var Z = 26 * Math.cos(lat) * Math.sin(long)
         var Y = 26  * Math.sin(lat)
 
-        const geometry = new THREE.SphereGeometry( 0.3, 32, 16 );
+        const geometry = new THREE.SphereGeometry( 0.3, 5, 4 );
         //texture
-        const baguette = new THREE.TextureLoader().load( 'baguette.jpg' );
-        const material = new THREE.MeshBasicMaterial( {map: baguette} );
+        
+        const material = new THREE.MeshBasicMaterial( {map: image} );
         const sphere = new THREE.Mesh( geometry, material );
         sphere.position.x = X
         sphere.position.y = Y
@@ -111,8 +111,27 @@
         latlon(latitude, longitude)
 
       });
-
       
+      
+      $.ajax({
+          url:'https://restcountries.com/v2/all?fields=latlng',
+          type:'GET',
+          dataType: 'json',
+          error: function()
+          {
+          },
+          success: function(data) {
+            image = new THREE.TextureLoader().load( 'leaf-green.jpg' );
+            console.log(data.length)
+            for(var i = 0; i < data.length; i++) {
+              console.log(data[i].latlng[0])
+              latlon(data[i].latlng[0], data[i].latlng[1])
+              setTimeout(5000);
+            }
+            
+          } 
+      });
+
 
 
     </script>
