@@ -10,6 +10,12 @@
     <link href="../style.css" rel="stylesheet">
     <title>Alex M TD4</title>
   </head>
+  <style>
+    body { padding-top: 0; padding-bottom: 0; }
+    #Nav {
+    margin-top: 0px;
+    }
+  </style>
   <body class="d-flex h-100 text-center text-white bg-dark">
     <div id="Nav" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"></div>
 
@@ -37,7 +43,7 @@
       var image = new THREE.TextureLoader().load( 'baguette.jpg' );
       //scene
       var scene = new THREE.Scene();
-      scene.background = new THREE.Color( 0x212529 );
+      scene.background = new THREE.TextureLoader().load( 'esapce.jpg' );
       var aspect = window.innerWidth / window.innerHeight;
       var camera = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 );
       var renderer = new THREE.WebGLRenderer();
@@ -51,11 +57,11 @@
       scene.add( light );
 
       //texture
-      const geometry = new THREE.SphereGeometry( 26, 32, 16 );
+      const geometry = new THREE.SphereGeometry( 21, 32, 16 );
       var material = new THREE.MeshPhongMaterial();
       material.map = new THREE.TextureLoader().load( 'terre.jpg' );
       material.bumpMap = new THREE.TextureLoader().load( 'terrenormal.jpg' );
-      material.bumpScale = 0.05;
+      material.bumpScale = 0.0005;
       material.specularMap = new THREE.TextureLoader().load( 'terrespecular.jpg' );
       material.specular = new THREE.Color('grey')
       const terre = new THREE.Mesh(geometry, material)
@@ -86,11 +92,11 @@
       function latlon(lat1, long1) {
         var lat = lat1 * Math.PI / 180
         var long = (-long1) * Math.PI / 180 
-        var X = 26 * Math.cos(lat) * Math.cos(long)
-        var Z = 26 * Math.cos(lat) * Math.sin(long)
-        var Y = 26  * Math.sin(lat)
+        var X = 21 * Math.cos(lat) * Math.cos(long)
+        var Z = 21 * Math.cos(lat) * Math.sin(long)
+        var Y = 21  * Math.sin(lat)
 
-        const geometry = new THREE.SphereGeometry( 0.3, 5, 4 );
+        const geometry = new THREE.SphereGeometry( 0.3, 20, 20 );
         //texture
         
         const material = new THREE.MeshBasicMaterial( {map: image} );
@@ -114,16 +120,17 @@
       
       
       $.ajax({
-          url:'https://restcountries.com/v2/all?fields=latlng',
+          url:'https://restcountries.com/v2/all?fields=latlng,flags',
           type:'GET',
           dataType: 'json',
           error: function()
           {
           },
           success: function(data) {
-            image = new THREE.TextureLoader().load( 'leaf-green.jpg' );
-            console.log(data.length)
+
+            console.log(data)
             for(var i = 0; i < data.length; i++) {
+              image = new THREE.TextureLoader().load( data[i].flags.svg);
               console.log(data[i].latlng[0])
               latlon(data[i].latlng[0], data[i].latlng[1])
               setTimeout(5000);
