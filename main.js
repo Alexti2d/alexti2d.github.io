@@ -9,7 +9,7 @@ $("#Nav").append(`
       <a class="nav-link" href="../td/td2.html">TD2</a>
       <a class="nav-link" href="../td/td3.html">TD3</a>
       <a class="nav-link" href="../td/td4.html">TD4</a>
-      <a class="nav-link" href="boussole.html">Boussole</a>
+      <a class="nav-link" href="../td/projet.html">Projet</a>
     </nav>
   </div>
 </header>

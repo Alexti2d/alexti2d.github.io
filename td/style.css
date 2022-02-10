@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+* {
+  font-family: 'Space Mono', monospace;
+  color: rgb(25, 25 , 25);
+}
+
+.coord, .position, .camera {
+  position: fixed;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 7px;
+  text-align: left;
+  background-color: rgba(25, 25, 25, 0.04);
+  border: solid 2px rgb(75, 75, 75);
+  -webkit-backdrop-filter: saturate(180%) blur(5px);
+  backdrop-filter: saturate(180%) blur(5px);
+}
+
+.position {
+  margin-top: 150px;
+}
+
+.camera {
+  margin-top: 300px;
+}
+
+#NouvelCoord {
+  font-family: 'Space Mono', monospace;
+  position: fixed;
+  width: 220px;
+  height: 110px;
+  font-weight: 600;
+  font-size: 19px;
+  margin-left: 87vw;
+  margin-top: 85vh;
+  border-radius: 7px;
+  background-color: rgba(25, 25, 25, 0.04);
+  border-style: solid;
+  -webkit-backdrop-filter: saturate(180%) blur(5px);
+  backdrop-filter: saturate(180%) blur(5px);
+}

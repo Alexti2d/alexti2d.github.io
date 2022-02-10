@@ -10,9 +10,142 @@
     <link href="../style.css" rel="stylesheet">
     <title>Alex M TD4</title>
   </head>
+  <style>
+    body { padding-top: 0; padding-bottom: 0; }
+    #Nav {
+    margin-top: 0px;
+    }
+  </style>
   <body class="d-flex h-100 text-center text-white bg-dark">
     <div id="Nav" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"></div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js "></script>
+
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "./three/three.js-master/build/three.module.js"
+				}
+			}
+		</script>
+
+		<script type="module">
+
+			import * as THREE from 'three';
+
+			import { GUI } from './gui.js';
+
+			import { GLTFLoader } from './three/three.js-master/examples/jsm/loaders/GLTFLoader.js';
+
+      import { OrbitControls } from './three/three.js-master/examples/jsm/controls/OrbitControls.js'
+      var image = new THREE.TextureLoader().load( 'baguette.jpg' );
+      //scene
+      var scene = new THREE.Scene();
+      scene.background = new THREE.TextureLoader().load( 'esapce.jpg' );
+      var aspect = window.innerWidth / window.innerHeight;
+      var camera = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 );
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize( window.innerWidth, window.innerHeight );
+      document.body.appendChild( renderer.domElement );
+
+      const controls = new OrbitControls( camera, renderer.domElement );
+
+      //light 
+      const light = new THREE.DirectionalLight( 0xdddddd, 1.5 );
+      scene.add( light );
+
+      //texture
+      const geometry = new THREE.SphereGeometry( 21, 32, 16 );
+      var material = new THREE.MeshPhongMaterial();
+      material.map = new THREE.TextureLoader().load( 'terre.jpg' );
+      material.bumpMap = new THREE.TextureLoader().load( 'terrenormal.jpg' );
+      material.bumpScale = 0.0005;
+      material.specularMap = new THREE.TextureLoader().load( 'terrespecular.jpg' );
+      material.specular = new THREE.Color('grey')
+      const terre = new THREE.Mesh(geometry, material)
+
+      //sphere
+      
+      const sphere = new THREE.Mesh( geometry, material );
+      scene.add( terre );
+
+      camera.position.z = 50;
+      
+
+      //render
+      var render = function () {
+          requestAnimationFrame( render );
+          controls.update();
+          renderer.render( scene, camera );
+      };
+      render();
+
+      
+
+
+
+      
+      
+
+      function latlon(lat1, long1) {
+        var lat = lat1 * Math.PI / 180
+        var long = (-long1) * Math.PI / 180 
+        var X = 21 * Math.cos(lat) * Math.cos(long)
+        var Z = 21 * Math.cos(lat) * Math.sin(long)
+        var Y = 21  * Math.sin(lat)
+
+        const geometry = new THREE.SphereGeometry( 0.3, 20, 20 );
+        //texture
+        
+        const material = new THREE.MeshBasicMaterial( {map: image} );
+        const sphere = new THREE.Mesh( geometry, material );
+        sphere.position.x = X
+        sphere.position.y = Y
+        sphere.position.z = Z
+        scene.add( sphere );
+        
+        camera.position.z = 50;
+        return
+      }
+
+      navigator.geolocation.getCurrentPosition(position => {
+
+        var { latitude, longitude } = position.coords;
+
+        latlon(latitude, longitude)
+
+      });
+      
+      
+      $.ajax({
+          url:'https://restcountries.com/v2/all?fields=latlng,flags',
+          type:'GET',
+          dataType: 'json',
+          error: function()
+          {
+          },
+          success: function(data) {
+
+            console.log(data)
+            for(var i = 0; i < data.length; i++) {
+              image = new THREE.TextureLoader().load( data[i].flags.svg);
+              console.log(data[i].latlng[0])
+              latlon(data[i].latlng[0], data[i].latlng[1])
+              setTimeout(5000);
+            }
+            
+          } 
+      });
+
+
+
+    </script>
+
+    
+    
     <script src="../main.js"></script>
+    <script src="td4.js"></script>
     </body>
 </html>
