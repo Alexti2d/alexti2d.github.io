@@ -75,25 +75,16 @@ function init() {
   );
   camera.position.set(0, 70, 300);
 
-  var video = document.querySelector("#videoElement");
 
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'} }) 
-    .then(function (stream) {
-      video.srcObject = stream;
-      scene = new THREE.Scene();
-      scene.background = new THREE.VideoTexture(video);
-      scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
-      scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x00FFFFFF);
-      scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
-    });
-}
 
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x00FFFFFF);
+  // scene.background = new THREE.VideoTexture(video);
+  scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
   
+
+
+
 
   // Light
   const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
@@ -131,6 +122,32 @@ if (navigator.mediaDevices.getUserMedia) {
     scene.add(object);
   });
 
+  var video = document.querySelector("#videoElement");
+
+  if (navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'} }) 
+      .then(function (stream) {
+        video.srcObject = stream;
+        const boxVid = new THREE.BoxGeometry(1920, 1080, 1);
+
+        var materialvid = new THREE.VideoTexture(video);
+
+        var mesh3 = new THREE.Mesh(boxVid, materialvid);
+
+        mesh3.position.x = 0;
+        mesh3.position.y = 0;
+        mesh3.position.z = -200;
+
+        scene.add(mesh3);
+        
+      })
+      .catch(function (err0r) {
+        console.log("Something went wrong!");
+      });
+  }
+
+  
+
   const geometry = new THREE.BoxGeometry(121, 2.7, 61);
 
   var material = new THREE.MeshPhongMaterial();
@@ -142,9 +159,9 @@ if (navigator.mediaDevices.getUserMedia) {
   );
 
   mesh2 = new THREE.Mesh(geometry, material);
-  mesh2.position.x = 2000;
-  mesh2.position.y = 2000;
-  mesh2.position.z = 2000;
+  mesh2.position.x = 0;
+  mesh2.position.y = 50;
+  mesh2.position.z = 50;
 
   scene.add(mesh2);
 
