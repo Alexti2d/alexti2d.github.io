@@ -44,9 +44,9 @@ function handleMotionEvent(event) {
   var AccelerationX = event.acceleration.x;
   var AccelerationY = event.acceleration.y;
 
-  camera.position.x += AccelerationX * -1;
+  camera.position.x += AccelerationX * -10;
 
-  camera.position.y += AccelerationY * -1;
+  camera.position.y += AccelerationY * -10;
 
   CameraX = camera.position.x;
   CameraY = camera.position.y;
@@ -81,7 +81,7 @@ function init() {
 
   const materialvid = new THREE.MeshBasicMaterial({ map: texturevid });
 
-  const boxVid = new THREE.BoxGeometry(1920, 1080, 1);
+  const boxVid = new THREE.BoxGeometry(window.innerWidth , window.innerHeight, 1);
 
   const meshvid = new THREE.Mesh( boxVid, materialvid );
 

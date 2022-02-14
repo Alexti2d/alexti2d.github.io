@@ -38,7 +38,5 @@
 }
 
 #videoElement {
-  margin: 0px auto;
-	width: 10vw;
-	height: 10vh;
+  display: none;
 }
