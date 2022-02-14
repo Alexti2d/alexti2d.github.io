@@ -34,64 +34,36 @@ var controls;
 const button = document.getElementById("NouvelCoord");
 button.addEventListener("click", NouvelCoord);
 
-navigator.geolocation.getCurrentPosition((position) => {
-  var { latitude, longitude } = position.coords;
-
-  latitude += 10;
-  longitude += 10;
-
-  $("#Latitude").text("Latitude : " + latitude);
-  $("#Longitude").text("Longitude : " + longitude);
-});
-
 function NouvelCoord() {
-  navigator.geolocation.getCurrentPosition((position) => {
-    var { latitude, longitude } = position.coords;
-    TableLatitude = latitude;
-    TableLongitude = longitude;
-
-    $("#Latitude").text("Latitude : " + TableLatitude);
-    $("#Longitude").text("Longitude : " + TableLongitude);
-
-    mesh2.position.x = -7;
-    mesh2.position.y = 44;
-    mesh2.position.z = -8;
-
     TablePose = true;
-  });
 }
 
-const WatchId = navigator.geolocation.watchPosition((position) => {
-  if(TablePose === true) {
-    const { latitude, longitude } = position.coords;
+window.addEventListener("devicemotion", handleMotionEvent, true);
 
-    PositionX = latitude - TableLatitude;
-    PositionY = longitude - TableLongitude;
+function handleMotionEvent(event) {
 
-    CameraX = camera.position.x;
-    CameraY = camera.position.y;
-    CameraZ = camera.position.z;
+  var AccelerationX = Math.round(event.accelerationIncludingGravity.x);
+  var AccelerationY = Math.round(event.accelerationIncludingGravity.y);
 
-    $("#PositionX").text("Position X : " + PositionX);
-    $("#PositionY").text("Position Y : " + PositionY);
-    $("#CameraX").text("Camera X : " + CameraX);
-    $("#CameraY").text("Camera Y : " + CameraY);
-    $("#CameraZ").text("Camera Z : " + CameraZ);
+  camera.position.x += AccelerationX;
 
-    var nombreX = PositionX;
-    var nombreArondieX = nombreX.toFixed(4)
-    var miniNombreX = (nombreX-nombreArondieX).toFixed(7) * 10000000
-    console.log(miniNombreX)
-    camera.position.x = miniNombreX
+  camera.position.y += AccelerationY;
 
-    var nombreY = PositionY;
-    var nombreArondieY = nombreY.toFixed(4)
-    //On recupere le 7em chiffre apres la virgule
-    var miniNombreY = (nombreY-nombreArondieY).toFixed(7) * 10000000
-    console.log(miniNombreY)
-    camera.position.z = miniNombreY
-  }
-});
+  CameraX = camera.position.x;
+  CameraY = camera.position.y;
+  CameraZ = camera.position.z;
+
+  
+
+
+  
+
+  $("#AccelerationX").text("Acceleration x : " + AccelerationX);
+  $("#AccelerationY").text("Acceleration y : " + AccelerationY);
+  $("#CameraX").text("Camera X : " + CameraX);
+  $("#CameraY").text("Camera Y : " + CameraY);
+  $("#CameraZ").text("Camera Z : " + CameraZ);
+}
 
 // Fin js classique
 
