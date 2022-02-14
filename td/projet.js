@@ -45,18 +45,14 @@ function handleMotionEvent(event) {
   var AccelerationX = event.acceleration.x;
   var AccelerationY = event.acceleration.y;
 
-  camera.position.x += AccelerationX;
+  camera.position.x += (AccelerationX * -1);
 
-  camera.position.y += AccelerationY;
+  camera.position.y += (AccelerationY * -1);
 
   CameraX = camera.position.x;
   CameraY = camera.position.y;
   CameraZ = camera.position.z;
 
-  
-
-
-  
 
   $("#AccelerationX").text("Acceleration x : " + AccelerationX);
   $("#AccelerationY").text("Acceleration y : " + AccelerationY);
@@ -78,11 +74,9 @@ function init() {
     2000
   );
   camera.position.set(0, 70, 300);
-  // camera.rotation.set(0, -50, 0)
-  // camera.position.set(0, 300, 300);
 
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xa0a0a0);
+  scene.background = new THREE.Color(0x00FFFFFF);
   scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
 
   // Light
@@ -102,13 +96,7 @@ function init() {
   //  scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
 
   // ground
-  const mesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(2000, 2000),
-    new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false })
-  );
-  mesh.rotation.x = -Math.PI / 2;
-  mesh.receiveShadow = true;
-  scene.add(mesh);
+
 
   const grid = new THREE.GridHelper(2000, 20, 0x000000, 0x000000);
   grid.material.opacity = 0.2;
@@ -124,7 +112,6 @@ function init() {
         child.receiveShadow = true;
       }
     });
-
     scene.add(object);
   });
 
