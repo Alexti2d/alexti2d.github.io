@@ -42,9 +42,9 @@ if (window.DeviceOrientationEvent) {
 function deviceOrientationListener(event) {
   $("#CameraX").text("Orientation alpha : " + Math.round(event.alpha));
   $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
-  $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
+  $("#CameraZ").text("Orientation gammax : " + Math.round(event.gamma));
 
-  controls.target.set(event.alpha, event.beta, event.gamma);
+  controls.target.set(0, 50, event.gamma * 10);
 
 }
 
