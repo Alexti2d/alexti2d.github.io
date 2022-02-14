@@ -42,8 +42,8 @@ window.addEventListener("devicemotion", handleMotionEvent, true);
 
 function handleMotionEvent(event) {
 
-  var AccelerationX = Math.round(event.accelerationIncludingGravity.x);
-  var AccelerationY = Math.round(event.accelerationIncludingGravity.y);
+  var AccelerationX = Math.round(event.acceleration.x);
+  var AccelerationY = Math.round(event.acceleration.y);
 
   camera.position.x += AccelerationX;
 
