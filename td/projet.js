@@ -20,16 +20,12 @@ animate();
 
 // js classique
 
-var TableLatitude;
-var TableLongitude;
-var PositionX;
-var PositionY;
 var CameraY;
 var CameraX;
 var CameraZ;
 var TablePose = false;
 var mesh2;
-var controls;
+var controls
 
 const button = document.getElementById("NouvelCoord");
 button.addEventListener("click", NouvelCoord);
@@ -38,32 +34,18 @@ function NouvelCoord() {
   TablePose = true;
 }
 
-window.addEventListener("devicemotion", handleMotionEvent, true);
+if (window.DeviceOrientationEvent) {
+  window.addEventListener("deviceorientation", deviceOrientationListener);
+} else {
+  alert("Sorry, your browser doesn't support Device Orientation");
+}
+function deviceOrientationListener(event) {
+  $("#CameraX").text("Orientation alpha : " + Math.round(event.alpha));
+  $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
+  $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
 
-function handleMotionEvent(event) {
-  var AccelerationX = event.acceleration.x;
-  var AccelerationY = event.acceleration.y;
+  controls.target.set(event.alpha, event.beta, event.gamma);
 
-  camera.position.x += AccelerationX * -10;
-
-  camera.position.y += AccelerationY * -10;
-
-  try {
-    meshvid.position.x += AccelerationX * -10;
-    meshvid.position.y += AccelerationY * -10;
-  }
-  catch {}
-  
-
-  CameraX = camera.position.x;
-  CameraY = camera.position.y;
-  CameraZ = camera.position.z;
-
-  $("#AccelerationX").text("Acceleration x : " + AccelerationX);
-  $("#AccelerationY").text("Acceleration y : " + AccelerationY);
-  $("#CameraX").text("Camera X : " + CameraX);
-  $("#CameraY").text("Camera Y : " + CameraY);
-  $("#CameraZ").text("Camera Z : " + CameraZ);
 }
 
 // Fin js classique
@@ -86,18 +68,6 @@ function init() {
 
   scene.background = new THREE.VideoTexture( video );
 
-  // const materialvid = new THREE.MeshBasicMaterial({ map: texturevid });
-
-  // const boxVid = new THREE.BoxGeometry(window.innerWidth , window.innerHeight, 1);
-
-  // const meshvid = new THREE.Mesh( boxVid, materialvid );
-
-  // meshvid.position.x = 0;
-  // meshvid.position.y = 0;
-  // meshvid.position.z = -200;
-
-  // scene.add(meshvid);
-  // scene.background = new THREE.VideoTexture(video);
   scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
 
   // Light
@@ -137,7 +107,7 @@ function init() {
 
   if ( navigator.mediaDevices && navigator.mediaDevices.getUserMedia ) {
 
-    const constraints = { video: { width: 1280, height: 720, facingMode: 'environment' } };
+    const constraints = { video: { width: window.innerWidth, height: window.innerHeight, facingMode: 'environment' } };
 
     navigator.mediaDevices.getUserMedia( constraints ).then( function ( stream ) {
 
@@ -174,9 +144,9 @@ function init() {
   container.appendChild(renderer.domElement);
 
   // Obit control
-  // controls = new OrbitControls(camera, renderer.domElement);
-  // controls.target.set(0, 50, 0);
-  // controls.update();
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.target.set(0, 50, 0);
+  controls.update();
 
   window.addEventListener("resize", onWindowResize);
 }
