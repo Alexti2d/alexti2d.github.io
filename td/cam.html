@@ -28,8 +28,14 @@
 <script>
 var video = document.querySelector("#videoElement");
 
+const constraints = {
+  video: {
+
+  }
+};
+
 if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: true })
+  navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'} }) 
     .then(function (stream) {
       video.srcObject = stream;
     })
