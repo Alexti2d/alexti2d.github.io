@@ -81,16 +81,19 @@ if (navigator.mediaDevices.getUserMedia) {
   navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'} }) 
     .then(function (stream) {
       video.srcObject = stream;
+      scene = new THREE.Scene();
+      scene.background = new THREE.VideoTexture(video);
+      scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
     })
     .catch(function (err0r) {
       console.log("Something went wrong!");
+      scene = new THREE.Scene();
       scene.background = new THREE.Color(0x00FFFFFF);
+      scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
     });
 }
 
-  scene = new THREE.Scene();
-  scene.background = new THREE.VideoTexture(video);
-  scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
+  
 
   // Light
   const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
