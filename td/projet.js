@@ -48,6 +48,9 @@ function handleMotionEvent(event) {
 
   camera.position.y += AccelerationY * -10;
 
+  meshvid.position.x += AccelerationX * -10;
+  meshvid.position.y += AccelerationY * -10;
+
   CameraX = camera.position.x;
   CameraY = camera.position.y;
   CameraZ = camera.position.z;
@@ -90,8 +93,6 @@ function init() {
   meshvid.position.z = -200;
 
   scene.add(meshvid);
-
-  scene.background = new THREE.TextureLoader().load("esapce.jpg");
   // scene.background = new THREE.VideoTexture(video);
   scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
 
