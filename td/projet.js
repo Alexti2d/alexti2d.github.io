@@ -35,24 +35,22 @@ const button = document.getElementById("NouvelCoord");
 button.addEventListener("click", NouvelCoord);
 
 function NouvelCoord() {
-    TablePose = true;
+  TablePose = true;
 }
 
 window.addEventListener("devicemotion", handleMotionEvent, true);
 
 function handleMotionEvent(event) {
-
   var AccelerationX = event.acceleration.x;
   var AccelerationY = event.acceleration.y;
 
-  camera.position.x += (AccelerationX * -1);
+  camera.position.x += AccelerationX * -1;
 
-  camera.position.y += (AccelerationY * -1);
+  camera.position.y += AccelerationY * -1;
 
   CameraX = camera.position.x;
   CameraY = camera.position.y;
   CameraZ = camera.position.z;
-
 
   $("#AccelerationX").text("Acceleration x : " + AccelerationX);
   $("#AccelerationY").text("Acceleration y : " + AccelerationY);
@@ -75,16 +73,27 @@ function init() {
   );
   camera.position.set(0, 70, 300);
 
-
-
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x00FFFFFF);
+
+  var video = document.querySelector("#videoElement");
+
+  const texturevid = new THREE.VideoTexture( video );
+
+  const materialvid = new THREE.MeshBasicMaterial({ map: texturevid });
+
+  const boxVid = new THREE.BoxGeometry(1920, 1080, 1);
+
+  const meshvid = new THREE.Mesh( boxVid, materialvid );
+
+  meshvid.position.x = 0;
+  meshvid.position.y = 0;
+  meshvid.position.z = -200;
+
+  scene.add(meshvid);
+
+  scene.background = new THREE.TextureLoader().load("esapce.jpg");
   // scene.background = new THREE.VideoTexture(video);
   scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
-  
-
-
-
 
   // Light
   const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
@@ -104,7 +113,6 @@ function init() {
 
   // ground
 
-
   const grid = new THREE.GridHelper(2000, 20, 0x000000, 0x000000);
   grid.material.opacity = 0.2;
   grid.material.transparent = true;
@@ -122,31 +130,22 @@ function init() {
     scene.add(object);
   });
 
-  var video = document.querySelector("#videoElement");
+  if ( navigator.mediaDevices && navigator.mediaDevices.getUserMedia ) {
 
-  if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'} }) 
-      .then(function (stream) {
-        video.srcObject = stream;
-        const boxVid = new THREE.BoxGeometry(1920, 1080, 1);
+    const constraints = { video: { width: 1280, height: 720, facingMode: 'environment' } };
 
-        var materialvid = new THREE.VideoTexture(video);
+    navigator.mediaDevices.getUserMedia( constraints ).then( function ( stream ) {
 
-        var mesh3 = new THREE.Mesh(boxVid, materialvid);
+      // apply the stream to the video element used in the texture
+      video.srcObject = stream;
+      video.play();
 
-        mesh3.position.x = 0;
-        mesh3.position.y = 0;
-        mesh3.position.z = -200;
-
-        scene.add(mesh3);
-        
-      })
-      .catch(function (err0r) {
-        console.log("Something went wrong!");
-      });
+    } ).catch( function ( error ) {
+      console.error( 'Unable to access the camera/webcam.', error );
+    } );
+  } else {
+    console.error( 'MediaDevices interface not available.' );
   }
-
-  
 
   const geometry = new THREE.BoxGeometry(121, 2.7, 61);
 
@@ -154,14 +153,12 @@ function init() {
 
   material.map = new THREE.TextureLoader().load("Marbre.jpg");
   // material.map = new THREE.TextureLoader().load( 'Granite.jpeg' );
-  material.specularMap = new THREE.TextureLoader().load(
-    "marbrepecular.jpg"
-  );
+  material.specularMap = new THREE.TextureLoader().load("marbrepecular.jpg");
 
   mesh2 = new THREE.Mesh(geometry, material);
-  mesh2.position.x = 0;
-  mesh2.position.y = 50;
-  mesh2.position.z = 50;
+  mesh2.position.x = -7;
+  mesh2.position.y = 44;
+  mesh2.position.z = -8;
 
   scene.add(mesh2);
 
@@ -178,7 +175,6 @@ function init() {
 
   window.addEventListener("resize", onWindowResize);
 }
-
 
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
