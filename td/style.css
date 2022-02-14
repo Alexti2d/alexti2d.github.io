@@ -36,3 +36,10 @@
   -webkit-backdrop-filter: saturate(180%) blur(5px);
   backdrop-filter: saturate(180%) blur(5px);
 }
+
+#videoElement {
+  margin: 0px auto;
+	width: 30vw;
+	height: 30vh;
+	background-color: #666;
+}

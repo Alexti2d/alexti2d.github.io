@@ -75,8 +75,21 @@ function init() {
   );
   camera.position.set(0, 70, 300);
 
+  var video = document.querySelector("#videoElement");
+
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'} }) 
+    .then(function (stream) {
+      video.srcObject = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+      scene.background = new THREE.Color(0x00FFFFFF);
+    });
+}
+
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x00FFFFFF);
+  scene.background = new THREE.VideoTexture(video);
   scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
 
   // Light
