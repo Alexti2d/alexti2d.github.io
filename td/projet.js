@@ -48,8 +48,12 @@ function handleMotionEvent(event) {
 
   camera.position.y += AccelerationY * -10;
 
-  meshvid.position.x += AccelerationX * -10;
-  meshvid.position.y += AccelerationY * -10;
+  try {
+    meshvid.position.x += AccelerationX * -10;
+    meshvid.position.y += AccelerationY * -10;
+  }
+  catch {}
+  
 
   CameraX = camera.position.x;
   CameraY = camera.position.y;
@@ -80,19 +84,19 @@ function init() {
 
   var video = document.querySelector("#videoElement");
 
-  const texturevid = new THREE.VideoTexture( video );
+  scene.background = new THREE.VideoTexture( video );
 
-  const materialvid = new THREE.MeshBasicMaterial({ map: texturevid });
+  // const materialvid = new THREE.MeshBasicMaterial({ map: texturevid });
 
-  const boxVid = new THREE.BoxGeometry(window.innerWidth , window.innerHeight, 1);
+  // const boxVid = new THREE.BoxGeometry(window.innerWidth , window.innerHeight, 1);
 
-  const meshvid = new THREE.Mesh( boxVid, materialvid );
+  // const meshvid = new THREE.Mesh( boxVid, materialvid );
 
-  meshvid.position.x = 0;
-  meshvid.position.y = 0;
-  meshvid.position.z = -200;
+  // meshvid.position.x = 0;
+  // meshvid.position.y = 0;
+  // meshvid.position.z = -200;
 
-  scene.add(meshvid);
+  // scene.add(meshvid);
   // scene.background = new THREE.VideoTexture(video);
   scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
 
