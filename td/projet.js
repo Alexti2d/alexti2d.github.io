@@ -20,9 +20,6 @@ animate();
 
 // js classique
 
-var CameraY;
-var CameraX;
-var CameraZ;
 var TablePose = false;
 var mesh2;
 var controls
@@ -45,7 +42,7 @@ function deviceOrientationListener(event) {
   $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
   $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
 
-  controls.target.set(0, 50, event.gamma * 10);
+  controls.target.set(event.alpha, event.beta, event.gamma);
   controls.update();
 
 }
