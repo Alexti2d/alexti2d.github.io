@@ -40,10 +40,14 @@ function deviceOrientationListener(event) {
 
   $("#CameraX").text("Orientation alpha : " + Math.round(event.alpha));
   $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
-  $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
+  $("#CameraZ").text("Orientation gammax : " + Math.round(event.gamma));
 
-  controls.target.set(event.alpha, event.beta, event.gamma);
-  controls.update();
+  camera.rotate.x = event.alpha * Math.PI / 180
+  camera.rotate.y = event.beta * Math.PI / 180
+  camera.rotate.z = event.gamma * Math.PI / 180
+
+  // controls.target.set(event.alpha, event.beta, event.gamma);
+  // controls.update();
 
 }
 
@@ -143,9 +147,9 @@ function init() {
   container.appendChild(renderer.domElement);
 
   // Obit control
-  controls = new OrbitControls(camera, renderer.domElement);
-  controls.target.set(0, 50, 0);
-  controls.update();
+  // controls = new OrbitControls(camera, renderer.domElement);
+  // controls.target.set(0, 50, 0);
+  // controls.update();
 
   window.addEventListener("resize", onWindowResize);
 }
