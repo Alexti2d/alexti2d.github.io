@@ -23,6 +23,10 @@ animate();
 var TablePose = false;
 var mesh2;
 var controls
+var Ancien
+var AncienAlpha = 0
+var AncienBeta = 0
+var AncienGamma = 0
 
 const button = document.getElementById("NouvelCoord");
 button.addEventListener("click", NouvelCoord);
@@ -42,12 +46,49 @@ function deviceOrientationListener(event) {
   $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
   $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
 
-  camera.rotation.x = event.alpha * Math.PI / 180
-  camera.rotation.y = event.beta * Math.PI / 180
-  camera.rotation.z = event.gamma * Math.PI / 180
+  // camera.rotation.x = event.alpha * Math.PI / 180
+  // camera.rotation.y = event.beta * Math.PI / 180
+  // camera.rotation.z = event.gamma * Math.PI / 180
 
-  // controls.target.set(event.alpha, event.beta, event.gamma);
-  // controls.update();
+  //initialiseur
+  if(Ancien == 0) {
+    AncienAlpha += event.alpha
+    AncienBeta += event.beta
+    AncienGamma += event.gamma
+    Ancien = 1
+  }
+  else {
+    if (AncienAlpha > event.alpha) {
+      AncienAlpha = AncienAlpha + event.alpha
+    }
+    else {
+      if (AncienAlpha < event.alpha) {
+        AncienAlpha = AncienAlpha - event.alpha
+      }
+    }
+    if (AncienBeta > event.beta) {
+      AncienBeta = AncienBeta + event.beta
+    }
+    else {
+      if (AncienBeta < event.beta) {
+        AncienBeta = AncienBeta - event.beta
+      }
+    }
+    if (AncienGamma > event.gamma) {
+      AncienGamma = AncienGamma + event.gamma
+    }
+    else {
+      if (AncienBeta < event.beta) {
+        AncienBeta = AncienBeta - event.beta
+      }
+    }
+    console.log(AncienAlpha, AncienBeta, AncienGamma)
+    controls.target.set(AncienAlpha, AncienBeta, AncienGamma);
+    controls.update();
+  }
+
+  
+  
 
 }
 
@@ -147,9 +188,9 @@ function init() {
   container.appendChild(renderer.domElement);
 
   // Obit control
-  // controls = new OrbitControls(camera, renderer.domElement);
-  // controls.target.set(0, 50, 0);
-  // controls.update();
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.target.set(0, 50, 0);
+  controls.update();
 
   window.addEventListener("resize", onWindowResize);
 }
