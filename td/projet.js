@@ -36,20 +36,17 @@ function NouvelCoord() {
 }
 
 if (window.DeviceOrientationEvent) {
-  window.addEventListener("deviceorientation", delayOrientation);
+  window.addEventListener("deviceorientation", deviceOrientationListener);
 } else {
   alert("Sorry, your browser doesn't support Device Orientation");
 }
 
-function delayOrientation(event) {
-  setTimeout(deviceOrientationListener(event), 1000)
-}
 
 function deviceOrientationListener(event) {
 
   $("#CameraX").text("Orientation alpha : " + Math.round(event.alpha));
   $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
-  $("#CameraZ").text("Orientation gammag : " + Math.round(event.gamma));
+  $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
 
   // camera.rotation.x = event.alpha * Math.PI / 180
   // camera.rotation.y = event.beta * Math.PI / 180
@@ -57,33 +54,33 @@ function deviceOrientationListener(event) {
 
   //initialiseur
   if(Ancien == 0) {
-    AncienAlpha += event.alpha
-    AncienBeta += event.beta
-    AncienGamma += event.gamma
+    AncienAlpha += Math.round(event.alpha)
+    AncienBeta += Math.round(event.beta)
+    AncienGamma += Math.round(event.gamma)
     Ancien = 1
   }
   else {
-    if (AncienAlpha > event.alpha) {
+    if (AncienAlpha > Math.round(event.alpha)) {
       AncienAlpha = AncienAlpha + event.alpha
     }
     else {
-      if (AncienAlpha < event.alpha) {
+      if (AncienAlpha < Math.round(event.alpha)) {
         AncienAlpha = AncienAlpha - event.alpha
       }
     }
-    if (AncienBeta > event.beta) {
+    if (AncienBeta > Math.round(event.beta)) {
       AncienBeta = AncienBeta + event.beta
     }
     else {
-      if (AncienBeta < event.beta) {
+      if (AncienBeta < Math.round(event.beta)) {
         AncienBeta = AncienBeta - event.beta
       }
     }
-    if (AncienGamma > event.gamma) {
+    if (AncienGamma > Math.round(event.gamma)) {
       AncienGamma = AncienGamma + event.gamma
     }
     else {
-      if (AncienBeta < event.beta) {
+      if (AncienBeta < Math.round(event.beta)) {
         AncienBeta = AncienBeta - event.beta
       }
     }
