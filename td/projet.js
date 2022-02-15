@@ -45,55 +45,22 @@ if (window.DeviceOrientationEvent) {
 function deviceOrientationListener(event) {
 
   $("#CameraX").text("Orientation alpha : " + Math.round(event.alpha));
-  $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
-  $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
+  // $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
+  // $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
 
   // camera.rotation.x = event.alpha * Math.PI / 180
   // camera.rotation.y = event.beta * Math.PI / 180
   // camera.rotation.z = event.gamma * Math.PI / 180
 
   //initialiseur
-  if(Ancien == 0) {
-    AncienAlpha += Math.round(event.alpha)
-    AncienBeta += Math.round(event.beta)
-    AncienGamma += Math.round(event.gamma)
-    Ancien = 1
-  }
-  else {
-    if (AncienAlpha > Math.round(event.alpha)) {
-      AncienAlpha = AncienAlpha + event.alpha
-    }
-    else {
-      if (AncienAlpha < Math.round(event.alpha)) {
-        AncienAlpha = AncienAlpha - event.alpha
-      }
-    }
-    if (AncienBeta > Math.round(event.beta)) {
-      AncienBeta = AncienBeta + event.beta
-    }
-    else {
-      if (AncienBeta < Math.round(event.beta)) {
-        AncienBeta = AncienBeta - event.beta
-      }
-    }
-    if (AncienGamma > Math.round(event.gamma)) {
-      AncienGamma = AncienGamma + event.gamma
-    }
-    else {
-      if (AncienBeta < Math.round(event.beta)) {
-        AncienBeta = AncienBeta - event.beta
-      }
-    }
-    console.log(AncienAlpha, AncienBeta, AncienGamma)
-    mesh2.rotation.x = AncienAlpha * 0.01;
-    mesh2.rotation.y = AncienBeta * 0.01;
-    mesh2.rotation.z = AncienGamma * 0.01;
+
+    mesh2.rotation.y = event.alpha * 0.01;
   }
 
   
   
 
-}
+
 
 // Fin js classique
 
