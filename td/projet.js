@@ -44,7 +44,7 @@ function deviceOrientationListener(event) {
 
   $("#CameraX").text("Orientation alpha : " + Math.round(event.alpha));
   $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
-  $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
+  $("#CameraZ").text("Orientation gammaf : " + Math.round(event.gamma));
 
   // camera.rotation.x = event.alpha * Math.PI / 180
   // camera.rotation.y = event.beta * Math.PI / 180
@@ -83,10 +83,9 @@ function deviceOrientationListener(event) {
       }
     }
     console.log(AncienAlpha, AncienBeta, AncienGamma)
-    mesh2.rotation.x = AncienAlpha * 0.1;
-    mesh2.rotation.y = AncienBeta * 0.1;
-    mesh2.rotation.z = AncienGamma * 0.1;
-    controls.update();
+    mesh2.rotation.x = AncienAlpha * 0.01;
+    mesh2.rotation.y = AncienBeta * 0.01;
+    mesh2.rotation.z = AncienGamma * 0.01;
   }
 
   
