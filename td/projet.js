@@ -36,7 +36,7 @@ function NouvelCoord() {
 }
 
 if (window.DeviceOrientationEvent) {
-  window.addEventListener("deviceorientation", deviceOrientationListener);
+  window.addEventListener("deviceorientation", setTimeout(deviceOrientationListener, 1000));
 } else {
   alert("Sorry, your browser doesn't support Device Orientation");
 }
@@ -44,15 +44,12 @@ function deviceOrientationListener(event) {
 
   $("#CameraX").text("Orientation alpha : " + Math.round(event.alpha));
   $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
-  $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
+  $("#CameraZ").text("Orientation gammaf : " + Math.round(event.gamma));
 
   // camera.rotation.x = event.alpha * Math.PI / 180
   // camera.rotation.y = event.beta * Math.PI / 180
   // camera.rotation.z = event.gamma * Math.PI / 180
 
-  setTimeout(Active, 1000)
-
-  function Active() {
   //initialiseur
   if(Ancien == 0) {
     AncienAlpha += event.alpha
@@ -89,7 +86,6 @@ function deviceOrientationListener(event) {
     mesh2.rotation.x = AncienAlpha * 0.01;
     mesh2.rotation.y = AncienBeta * 0.01;
     mesh2.rotation.z = AncienGamma * 0.01;
-  }
   }
 
   
