@@ -44,7 +44,7 @@ function deviceOrientationListener(event) {
 
   $("#CameraX").text("Orientation alpha : " + Math.round(event.alpha));
   $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
-  $("#CameraZ").text("Orientation gammax : " + Math.round(event.gamma));
+  $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
 
   // camera.rotation.x = event.alpha * Math.PI / 180
   // camera.rotation.y = event.beta * Math.PI / 180
@@ -83,6 +83,9 @@ function deviceOrientationListener(event) {
       }
     }
     console.log(AncienAlpha, AncienBeta, AncienGamma)
+    mesh2.position.x = -7;
+    mesh2.position.y = 44;
+    mesh2.position.z = -8;
     controls.target.set(AncienAlpha, AncienBeta, AncienGamma);
     controls.update();
   }
