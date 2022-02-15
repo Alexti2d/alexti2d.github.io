@@ -83,9 +83,9 @@ function deviceOrientationListener(event) {
       }
     }
     console.log(AncienAlpha, AncienBeta, AncienGamma)
-    mesh2.rotation.x = AncienAlpha * Math.PI/180;
-    mesh2.rotation.y = AncienBeta * Math.PI/180;
-    mesh2.rotation.z = AncienGamma * Math.PI/180;
+    mesh2.rotation.x = AncienAlpha * 0.1;
+    mesh2.rotation.y = AncienBeta * 0.1;
+    mesh2.rotation.z = AncienGamma * 0.1;
     controls.update();
   }
 
