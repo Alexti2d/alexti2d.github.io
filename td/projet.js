@@ -40,11 +40,11 @@ function deviceOrientationListener(event) {
 
   $("#CameraX").text("Orientation alpha : " + Math.round(event.alpha));
   $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
-  $("#CameraZ").text("Orientation gammax : " + Math.round(event.gamma));
+  $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
 
-  camera.rotate.x = event.alpha * Math.PI / 180
-  camera.rotate.y = event.beta * Math.PI / 180
-  camera.rotate.z = event.gamma * Math.PI / 180
+  camera.rotation.x = event.alpha * Math.PI / 180
+  camera.rotation.y = event.beta * Math.PI / 180
+  camera.rotation.z = event.gamma * Math.PI / 180
 
   // controls.target.set(event.alpha, event.beta, event.gamma);
   // controls.update();
