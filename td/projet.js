@@ -2,10 +2,10 @@
 import * as THREE from "three";
 
 //Objet
-import { FBXLoader } from "./three/three.js-master/examples/jsm/loaders/FBXLoader.js";
+//import { FBXLoader } from "./three/three.js-master/examples/jsm/loaders/FBXLoader.js";
 
 //Texture
-import { DDSLoader } from "./three/three.js-master/examples/jsm/loaders/DDSLoader.js";
+//import { DDSLoader } from "./three/three.js-master/examples/jsm/loaders/DDSLoader.js";
 
 import { OrbitControls } from "./three/three.js-master/examples//jsm/controls/OrbitControls.js";
 
@@ -25,10 +25,6 @@ var mesh;
 var mesh2;
 var mesh3;
 var controls
-var Ancien
-var AncienAlpha = 0
-var AncienBeta = 0
-var AncienGamma = 0
 
 const button = document.getElementById("NouvelCoord");
 button.addEventListener("click", NouvelCoord);
@@ -50,9 +46,9 @@ function deviceOrientationListener(event) {
   $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
   $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
 
-    mesh.rotation.y = event.alpha * 0.01 ;
-    mesh2.rotation.x = event.beta * 0.01 ;
-    mesh3.rotation.z = event.gamma * 0.01 ;
+    mesh.rotation.y = event.alpha * 0.1 ;
+    mesh2.rotation.x = event.beta * 0.1 ;
+    mesh3.rotation.z = event.gamma * 0.1 ;
   }
 
   
@@ -97,13 +93,6 @@ function init() {
   scene.add(dirLight);
 
   //  scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
-
-  // ground
-
-  const grid = new THREE.GridHelper(2000, 20, 0x000000, 0x000000);
-  grid.material.opacity = 0.2;
-  grid.material.transparent = true;
-  scene.add(grid);
 
   // model
   // const loader = new FBXLoader();
