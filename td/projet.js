@@ -21,7 +21,9 @@ animate();
 // js classique
 
 var TablePose = false;
+var mesh;
 var mesh2;
+var mesh3;
 var controls
 var Ancien
 var AncienAlpha = 0
@@ -45,16 +47,12 @@ if (window.DeviceOrientationEvent) {
 function deviceOrientationListener(event) {
 
   $("#CameraX").text("Orientation alpha : " + Math.round(event.alpha));
-  // $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
-  // $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
+  $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
+  $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
 
-  // camera.rotation.x = event.alpha * Math.PI / 180
-  // camera.rotation.y = event.beta * Math.PI / 180
-  // camera.rotation.z = event.gamma * Math.PI / 180
-
-  //initialiseur
-
-    mesh2.rotation.y = event.alpha * 0.01;
+    mesh.rotation.y = event.alpha * 0.01 ;
+    mesh2.rotation.x = event.beta * 0.01 ;
+    mesh3.rotation.z = event.gamma * 0.01 ;
   }
 
   
@@ -108,16 +106,16 @@ function init() {
   scene.add(grid);
 
   // model
-  const loader = new FBXLoader();
-  loader.load("table.fbx", function (object) {
-    object.traverse(function (child) {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
-    scene.add(object);
-  });
+  // const loader = new FBXLoader();
+  // loader.load("table.fbx", function (object) {
+  //   object.traverse(function (child) {
+  //     if (child.isMesh) {
+  //       child.castShadow = true;
+  //       child.receiveShadow = true;
+  //     }
+  //   });
+  //   scene.add(object);
+  // });
 
   if ( navigator.mediaDevices && navigator.mediaDevices.getUserMedia ) {
 
@@ -136,20 +134,35 @@ function init() {
     console.error( 'MediaDevices interface not available.' );
   }
 
-  const geometry = new THREE.BoxGeometry(121, 2.7, 61);
+  const geometry = new THREE.TorusGeometry(121, 2.7, 61, 100);
+  const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 
-  var material = new THREE.MeshPhongMaterial();
+  mesh = new THREE.Mesh(geometry, material);
+  mesh.position.x = -7;
+  mesh.position.y = 44;
+  mesh.position.z = -8;
 
-  material.map = new THREE.TextureLoader().load("Marbre.jpg");
-  // material.map = new THREE.TextureLoader().load( 'Granite.jpeg' );
-  material.specularMap = new THREE.TextureLoader().load("marbrepecular.jpg");
+  scene.add(mesh);
 
-  mesh2 = new THREE.Mesh(geometry, material);
+  const geometry2 = new THREE.TorusGeometry(100, 2.7, 61, 100);
+  const material2 = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+
+  mesh2 = new THREE.Mesh(geometry2, material2);
   mesh2.position.x = -7;
   mesh2.position.y = 44;
   mesh2.position.z = -8;
 
   scene.add(mesh2);
+
+  const geometry3 = new THREE.TorusGeometry(110, 2.7, 61, 100);
+  const material3 = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+
+  mesh3 = new THREE.Mesh(geometry3, material3);
+  mesh3.position.x = -7;
+  mesh3.position.y = 44;
+  mesh3.position.z = -8;
+
+  scene.add(mesh3);
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
