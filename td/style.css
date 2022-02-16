@@ -33,15 +33,15 @@
   }
 }
 
-.alpha {
+#alpha {
   color: #ffff00;
   font-weight: bold;
 }
-.beta {
+#beta {
   color: #ff0000;
   font-weight: bold;
 }
-.gamma {
+#gamma {
   color: #00ff00;
   font-weight: bold;
 }

@@ -20,18 +20,11 @@ animate();
 
 // js classique
 
-var TablePose = false;
 var mesh;
 var mesh2;
 var mesh3;
 var controls
 
-const button = document.getElementById("NouvelCoord");
-button.addEventListener("click", NouvelCoord);
-
-function NouvelCoord() {
-  TablePose = true;
-}
 
 if (window.DeviceOrientationEvent) {
   window.addEventListener("deviceorientation", deviceOrientationListener);
@@ -42,9 +35,9 @@ if (window.DeviceOrientationEvent) {
 
 function deviceOrientationListener(event) {
 
-  $("#CameraX").text("Orientation alpha : " + Math.round(event.alpha));
-  $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
-  $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
+  $("#alpha").text("alpha : " + Math.round(event.alpha));
+  $("#beta").text("beta : " + Math.round(event.beta));
+  $("#gamma").text("gamma : " + Math.round(event.gamma));
 
     mesh.rotation.y = event.alpha * Math.PI/180;
     mesh2.rotation.x = event.beta * Math.PI/180;
