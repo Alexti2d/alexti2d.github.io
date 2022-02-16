@@ -43,7 +43,13 @@ function init() {
     1,
     2000
   );
-  camera.position.set(0, 40, window.innerWidth * 1.6);
+  if(window.innerWidth > 1024) {
+    camera.position.set(0, 0, 400);
+  }
+  else {
+    camera.position.set(0, 0, window.innerWidth * 1.7);
+  }
+  
 
   scene = new THREE.Scene();
 
@@ -85,33 +91,25 @@ function init() {
   const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 
   mesh = new THREE.Mesh(geometry, material);
-  mesh.position.x = 0;
-  mesh.position.y = 0;
-  mesh.position.z = 0;
   mesh.rotation.x = 90 * Math.PI/180;
   mesh.rotation.y = 90 * Math.PI/180;
-
+  mesh.position.set(0, 0, 0);
   scene.add(mesh);
 
   const geometry2 = new THREE.TorusGeometry(100, 2.7, 50, 100);
   const material2 = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 
   mesh2 = new THREE.Mesh(geometry2, material2);
-  mesh2.position.x = 0;
-  mesh2.position.y = 0;
-  mesh2.position.z = 0;
-
+  mesh2.position.set(0, 0, 0);
   scene.add(mesh2);
 
   const geometry3 = new THREE.TorusGeometry(110, 2.7, 50, 100);
   const material3 = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 
   mesh3 = new THREE.Mesh(geometry3, material3);
-  mesh3.position.x = 0;
-  mesh3.position.y = 0;
-  mesh3.position.z = 0;
-  
 
+  mesh3.position.set(0, 0, 0);
+  
   scene.add(mesh3);
 
   renderer = new THREE.WebGLRenderer({ antialias: true });

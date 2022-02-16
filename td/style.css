@@ -6,7 +6,7 @@
 }
 
 
-.camera, .gyro {
+.camera, .gyro, .position, .coord {
   position: fixed;
   padding: 10px;
   margin-top: 50px;
@@ -19,7 +19,7 @@
   backdrop-filter: saturate(180%) blur(5px);
 }
 
-.gyro {
+.gyro, .coord {
   text-align: center;
   font-weight: bold;
 }
@@ -28,12 +28,36 @@
   top: 100px;
 }
 
+.coord {
+  bottom: 185px
+}
+
+.position {
+  bottom: 50px;
+}
+
 @media (max-width: 1120px) {
-  .camera, .gyro {
-    margin-top: 25px;
+  .gyro {
+    margin-top: 20px;
     left: 0vw;
     right: 0vw;
   }
+  .camera {
+    margin-top: 0px;
+    left: 0vw;
+    right: 0vw;
+  }
+  .position {
+    bottom: 25px;
+    left: 0vw;
+    right: 0vw;
+  }
+  .coord {
+    bottom: 135px;
+    left: 0vw;
+    right: 0vw;
+  }
+  
 }
 
 #alpha {
