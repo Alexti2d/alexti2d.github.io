@@ -46,9 +46,9 @@ function deviceOrientationListener(event) {
   $("#CameraY").text("Orientation beta : " + Math.round(event.beta));
   $("#CameraZ").text("Orientation gamma : " + Math.round(event.gamma));
 
-    mesh.rotation.y = event.alpha * Math.PI/180;
+    mesh.rotation.z = event.alpha * Math.PI/180;
     mesh2.rotation.x = event.beta * Math.PI/180;
-    mesh3.rotation.z = event.gamma * Math.PI/180;
+    mesh3.rotation.y = event.gamma * Math.PI/180;
   }
 
   
