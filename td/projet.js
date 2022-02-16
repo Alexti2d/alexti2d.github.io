@@ -26,9 +26,9 @@ function deviceOrientationListener(event) {
   $("#beta").text("beta : " + Math.round(event.beta));
   $("#gamma").text("gamma : " + Math.round(event.gamma));
 
-    mesh.rotation.y = (90 + event.alpha) * Math.PI/180;
+    mesh.rotation.y = event.alpha * Math.PI/180;
     mesh2.rotation.x = event.beta * Math.PI/180;
-    mesh3.rotation.y = event.gamma * Math.PI/180;
+    mesh3.rotation.y = (90 + event.gamma) * Math.PI/180;
   }
 
 // Fin js classique
@@ -107,9 +107,9 @@ function init() {
   const material3 = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 
   mesh3 = new THREE.Mesh(geometry3, material3);
-
+  mesh3.rotation.y = 90 * Math.PI/180;
   mesh3.position.set(0, 0, 0);
-  
+
   scene.add(mesh3);
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
