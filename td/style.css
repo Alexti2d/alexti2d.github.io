@@ -5,10 +5,10 @@
   color: rgb(25, 25 , 25);
 }
 
-.position, .camera {
+
+.camera, .gyro {
   position: fixed;
   padding: 10px;
-  margin: 5px;
   border-radius: 7px;
   text-align: left;
   background-color: rgba(25, 25, 25, 0.04);
@@ -17,24 +17,33 @@
   backdrop-filter: saturate(180%) blur(5px);
 }
 
-.camera {
-  margin-top: 150px;
+.gyro {
+  text-align: center;
+  font-weight: bold;
 }
 
-#NouvelCoord {
-  font-family: 'Space Mono', monospace;
-  position: fixed;
-  width: 220px;
-  height: 110px;
-  font-weight: 600;
-  font-size: 19px;
-  margin-left: 87vw;
-  margin-top: 85vh;
-  border-radius: 7px;
-  background-color: rgba(25, 25, 25, 0.04);
-  border-style: solid;
-  -webkit-backdrop-filter: saturate(180%) blur(5px);
-  backdrop-filter: saturate(180%) blur(5px);
+.camera {
+  top: 100px;
+}
+
+@media (max-width: 1000px) {
+  .camera, .gyro {
+    left: 0vw;
+    right: 0vw;
+  }
+}
+
+.alpha {
+  color: #ffff00;
+  font-weight: bold;
+}
+.beta {
+  color: #ff0000;
+  font-weight: bold;
+}
+.gamma {
+  color: #00ff00;
+  font-weight: bold;
 }
 
 #videoElement {

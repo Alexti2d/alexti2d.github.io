@@ -123,7 +123,7 @@ function init() {
     console.error( 'MediaDevices interface not available.' );
   }
 
-  const geometry = new THREE.TorusGeometry(121, 2.7, 61, 100);
+  const geometry = new THREE.TorusGeometry(120, 2.7, 61, 100);
   const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 
   mesh = new THREE.Mesh(geometry, material);
@@ -162,9 +162,9 @@ function init() {
   container.appendChild(renderer.domElement);
 
   // Obit control
-  controls = new OrbitControls(camera, renderer.domElement);
-  controls.target.set(0, 50, 0);
-  controls.update();
+  // controls = new OrbitControls(camera, renderer.domElement);
+  // controls.target.set(0, 50, 0);
+  // controls.update();
 
   window.addEventListener("resize", onWindowResize);
 }

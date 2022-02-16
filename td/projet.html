@@ -24,11 +24,19 @@
   </head>
 
   <body class="d-flex h-100 text-center text-white bg-dark">
-		<div class="camera">
-      <h1 id="CameraX"></h1>
-      <h1 id="CameraY"></h1>
-      <h1 id="CameraZ"></h1>
+    <div class="container">
+      <div class="row mx-auto">
+        <div class="gyro mx-auto offset-1 offset-4 col-10 col-xl-4">
+          <h1>Gyroscope</h1>
+        </div>
+        <div class="camera mx-auto offset-1 offset-4 col-10 col-xl-4">
+          <h2 id="CameraX">Orientation <span class="alpha">alpha : 0</span></h2>
+          <h2 id="CameraY">Orientation <span class="beta">beta : 0</span></h2>
+          <h2 id="CameraZ">Orientation <span class="gamma">gamma : 0</span></h2>
+        </div>
+      </div>
     </div>
+		
 
     <div id="contener">
       <video autoplay="true" id="videoElement">
@@ -36,8 +44,6 @@
       </video>
       <!-- <img src="./esapce.jpg"> -->
     </div>
-
-    <button id="NouvelCoord">Définire ma position</button>
 
     <script>
       var video = document.querySelector("#videoElement");
