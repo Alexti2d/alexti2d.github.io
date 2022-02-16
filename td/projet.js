@@ -39,7 +39,7 @@ function deviceOrientationListener(event) {
   $("#beta").text("beta : " + Math.round(event.beta));
   $("#gamma").text("gamma : " + Math.round(event.gamma));
 
-    mesh.rotation.y = event.alpha * Math.PI/180;
+    mesh.rotation.z = event.alpha * Math.PI/180;
     mesh2.rotation.x = event.beta * Math.PI/180;
     mesh3.rotation.y = event.gamma * Math.PI/180;
   }
@@ -61,15 +61,13 @@ function init() {
     1,
     2000
   );
-  camera.position.set(0, 70, 300);
+  camera.position.set(0, 40, 350);
 
   scene = new THREE.Scene();
 
   var video = document.querySelector("#videoElement");
 
   scene.background = new THREE.VideoTexture( video );
-
-  scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
 
   // Light
   const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
@@ -79,10 +77,6 @@ function init() {
   const dirLight = new THREE.DirectionalLight(0xffffff);
   dirLight.position.set(0, 200, 100);
   dirLight.castShadow = true;
-  dirLight.shadow.camera.top = 180;
-  dirLight.shadow.camera.bottom = -100;
-  dirLight.shadow.camera.left = -120;
-  dirLight.shadow.camera.right = 120;
   scene.add(dirLight);
 
   //  scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
@@ -111,12 +105,13 @@ function init() {
 
     } ).catch( function ( error ) {
       console.error( 'Unable to access the camera/webcam.', error );
+      scene.background = new THREE.MeshBasicMaterial( { color: 0xefefef } );
     } );
   } else {
     console.error( 'MediaDevices interface not available.' );
   }
 
-  const geometry = new THREE.TorusGeometry(120, 2.7, 61, 100);
+  const geometry = new THREE.TorusGeometry(120, 2.7, 50, 100);
   const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 
   mesh = new THREE.Mesh(geometry, material);
@@ -127,7 +122,7 @@ function init() {
 
   scene.add(mesh);
 
-  const geometry2 = new THREE.TorusGeometry(100, 2.7, 61, 100);
+  const geometry2 = new THREE.TorusGeometry(100, 2.7, 50, 100);
   const material2 = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 
   mesh2 = new THREE.Mesh(geometry2, material2);
@@ -137,7 +132,7 @@ function init() {
 
   scene.add(mesh2);
 
-  const geometry3 = new THREE.TorusGeometry(110, 2.7, 61, 100);
+  const geometry3 = new THREE.TorusGeometry(110, 2.7, 50, 100);
   const material3 = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 
   mesh3 = new THREE.Mesh(geometry3, material3);
