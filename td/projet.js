@@ -150,7 +150,7 @@ function init() {
   mesh3.position.x = -7;
   mesh3.position.y = 44;
   mesh3.position.z = -8;
-  mesh3.rotation.x = 90 * Math.PI/180;
+  mesh3.rotation.y = 90 * Math.PI/180;
 
   scene.add(mesh3);
 
