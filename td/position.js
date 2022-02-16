@@ -4,7 +4,7 @@ const WatchId = navigator.geolocation.watchPosition(position => {
   const date = new Date(time);
   const accuracy = position.coords.accuracy;
 ;
-  $("#Latitude").text("Latitude : " + latitude);
-  $("#Longitude").text("Longitude : " + longitude);
+  $("#Latitude").text("Latitude : " + Math.round(latitude));
+  $("#Longitude").text("Longitude : " + Math.round(longitude));
 
 });
