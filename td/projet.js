@@ -1,19 +1,7 @@
 //threejs
 import * as THREE from "three";
 
-//Objet
-//import { FBXLoader } from "./three/three.js-master/examples/jsm/loaders/FBXLoader.js";
-
-//Texture
-//import { DDSLoader } from "./three/three.js-master/examples/jsm/loaders/DDSLoader.js";
-
-import { OrbitControls } from "./three/three.js-master/examples//jsm/controls/OrbitControls.js";
-
-let camera, scene, renderer, stats;
-
-const clock = new THREE.Clock();
-
-let mixer;
+let camera, scene, renderer;
 
 init();
 animate();
@@ -23,7 +11,6 @@ animate();
 var mesh;
 var mesh2;
 var mesh3;
-var controls
 
 
 if (window.DeviceOrientationEvent) {
@@ -39,15 +26,10 @@ function deviceOrientationListener(event) {
   $("#beta").text("beta : " + Math.round(event.beta));
   $("#gamma").text("gamma : " + Math.round(event.gamma));
 
-    mesh.rotation.z = event.alpha * Math.PI/180;
+    mesh.rotation.y = (90 + event.alpha) * Math.PI/180;
     mesh2.rotation.x = event.beta * Math.PI/180;
     mesh3.rotation.y = event.gamma * Math.PI/180;
   }
-
-  
-  
-
-
 
 // Fin js classique
 
@@ -61,7 +43,7 @@ function init() {
     1,
     2000
   );
-  camera.position.set(0, 40, 350);
+  camera.position.set(0, 40, window.innerWidth * 1.6);
 
   scene = new THREE.Scene();
 
@@ -80,18 +62,6 @@ function init() {
   scene.add(dirLight);
 
   //  scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
-
-  // model
-  // const loader = new FBXLoader();
-  // loader.load("table.fbx", function (object) {
-  //   object.traverse(function (child) {
-  //     if (child.isMesh) {
-  //       child.castShadow = true;
-  //       child.receiveShadow = true;
-  //     }
-  //   });
-  //   scene.add(object);
-  // });
 
   if ( navigator.mediaDevices && navigator.mediaDevices.getUserMedia ) {
 
@@ -115,9 +85,10 @@ function init() {
   const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 
   mesh = new THREE.Mesh(geometry, material);
-  mesh.position.x = -7;
-  mesh.position.y = 44;
-  mesh.position.z = -8;
+  mesh.position.x = 0;
+  mesh.position.y = 0;
+  mesh.position.z = 0;
+  mesh.rotation.x = 90 * Math.PI/180;
   mesh.rotation.y = 90 * Math.PI/180;
 
   scene.add(mesh);
@@ -126,9 +97,9 @@ function init() {
   const material2 = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 
   mesh2 = new THREE.Mesh(geometry2, material2);
-  mesh2.position.x = -7;
-  mesh2.position.y = 44;
-  mesh2.position.z = -8;
+  mesh2.position.x = 0;
+  mesh2.position.y = 0;
+  mesh2.position.z = 0;
 
   scene.add(mesh2);
 
@@ -136,9 +107,9 @@ function init() {
   const material3 = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 
   mesh3 = new THREE.Mesh(geometry3, material3);
-  mesh3.position.x = -7;
-  mesh3.position.y = 44;
-  mesh3.position.z = -8;
+  mesh3.position.x = 0;
+  mesh3.position.y = 0;
+  mesh3.position.z = 0;
   
 
   scene.add(mesh3);
@@ -162,8 +133,6 @@ function onWindowResize() {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
-
-//
 
 function animate() {
   requestAnimationFrame(animate);

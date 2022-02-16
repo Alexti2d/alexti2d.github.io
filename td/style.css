@@ -28,7 +28,7 @@
   top: 100px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1120px) {
   .camera, .gyro {
     margin-top: 25px;
     left: 0vw;
