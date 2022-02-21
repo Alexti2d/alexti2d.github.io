@@ -1,7 +1,7 @@
 const OFFLINE_VERSION = 1;
 const CACHE_NAME = "offline";
 // Customize this with a different URL if needed.
-const OFFLINE_URL = "pwa.html";
+const OFFLINE_URL = "./pwa.html";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
