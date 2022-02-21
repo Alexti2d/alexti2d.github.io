@@ -3,7 +3,7 @@
     "background_color": "#e78b32",
     "display": "fullscreen",
     "scope": "/",
-    "start_url": "https://alexti2d.github.io/td/pwa/pwa.html",
+    "start_url": "./pwa/pwa.html",
     "name": "PWA",
     "prefer_related_applications": "true",
     "short_name": "PWA",
