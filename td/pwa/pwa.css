@@ -1,10 +1,10 @@
-.carousel-item img {
+.carousel-inner {
     border-radius: 10px;
+
 }
 
 .carousel {
     padding: 0;
-    border-radius: 10px;
 }
 
 .carousel-control-prev, .carousel-control-next {
