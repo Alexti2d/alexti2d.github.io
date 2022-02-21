@@ -1,0 +1,16 @@
+.carousel-item img {
+    border-radius: 10px;
+}
+
+.carousel {
+    padding: 0;
+    border-radius: 10px;
+}
+
+.carousel-control-prev, .carousel-control-next {
+
+    backdrop-filter: saturate(115%) blur(10px);
+    opacity: 0.9;
+    border-radius: 10px;
+
+}
